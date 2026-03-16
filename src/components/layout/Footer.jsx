@@ -96,11 +96,20 @@ export default function Footer() {
                             <h4 className="text-white font-black uppercase tracking-widest text-sm text-[12px]">Resources</h4>
                         </div>
                         <nav className="flex flex-col gap-4">
-                            {['About Us', 'Pricing', 'Contact', 'FAQ'].map((item) => (
-                                <a key={item} href="#" className="text-slate-400 hover:text-accent transition-colors flex items-center gap-2 group text-sm">
+                            {[
+                                { name: 'Home', path: '/' },
+                                { name: 'Pricing', path: '/#pricing' },
+                                { name: 'Contact', path: '/contact' },
+                                { name: 'FAQ', path: '/#faq' }
+                            ].map((item) => (
+                                <Link 
+                                    key={item.name} 
+                                    to={item.path} 
+                                    className="text-slate-400 hover:text-accent transition-colors flex items-center gap-2 group text-sm"
+                                >
                                     <ChevronRight className="size-3 text-accent group-hover:translate-x-1 transition-transform" />
-                                    {item}
-                                </a>
+                                    {item.name}
+                                </Link>
                             ))}
                         </nav>
                     </div>

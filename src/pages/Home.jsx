@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
     Trophy, MapPin, Clock, Zap, Hand, Cpu, Star, Check, MessageCircle, Home as HomeIcon, Briefcase, DollarSign, Info
 } from 'lucide-react';
@@ -8,6 +8,7 @@ import { SectionTitle, ServiceCard, PricingCard } from '../components/ui/Cards';
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('home');
+    const navigate = useNavigate();
 
     return (
         <div className="selection:bg-gold selection:text-black bg-white min-h-screen relative">
@@ -372,9 +373,13 @@ export default function Home() {
                     { icon: HomeIcon, label: "Home", id: "home" },
                     { icon: Briefcase, label: "Services", id: "services" },
                     { icon: DollarSign, label: "Pricing", id: "pricing" },
-                    { icon: Info, label: "About", id: "location" }
+                    { icon: MessageCircle, label: "Contact", path: "/contact" }
                 ].map(item => (
-                    <button key={item.id} onClick={() => setActiveTab(item.id)} className={`flex flex-col items-center gap-1 p-3 rounded-2xl transition-all ${activeTab === item.id ? 'bg-primary text-background-dark' : 'text-slate-500'}`}>
+                    <button 
+                        key={item.label} 
+                        onClick={() => item.path ? navigate(item.path) : setActiveTab(item.id)} 
+                        className={`flex flex-col items-center gap-1 p-3 rounded-2xl transition-all ${activeTab === item.id ? 'bg-primary text-background-dark' : 'text-slate-500'}`}
+                    >
                         <item.icon className="size-5" />
                         <span className="text-[10px] font-black uppercase tracking-tighter">{item.label}</span>
                     </button>

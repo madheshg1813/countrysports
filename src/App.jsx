@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import CityLandingPage from './pages/CityLandingPage';
 import BrandLandingPage from './pages/BrandLandingPage';
 import BadmintonService from './pages/BadmintonService';
+import Contact from './pages/Contact';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -31,6 +32,7 @@ export default function App() {
 
                             <Route path="/chennai/badminton-stringing-services-in-:cityName" element={<CityLandingPage />} />
                             <Route path="/brands/:brandName" element={<BrandLandingPage />} />
+                            <Route path="/contact" element={<Contact />} />
                         </Routes>
                     </AnimatePresence>
                 </main>

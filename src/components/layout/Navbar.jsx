@@ -19,7 +19,8 @@ export default function Navbar() {
     const navItems = [
         { label: 'Services', type: 'dropdown', items: CITIES, pathPrefix: '/services' },
         { label: 'Brands', type: 'dropdown', items: BRANDS, pathPrefix: '/brands' },
-        { label: 'Pricing', path: '/#pricing' }
+        { label: 'Pricing', path: '/#pricing' },
+        { label: 'Contact', path: '/contact' }
     ];
 
     return (
@@ -65,10 +66,10 @@ export default function Navbar() {
                                     </>
                                 ) : (
                                     <NavigationMenu.Link asChild>
-                                        <a href={item.path} className="hover:text-accent transition-colors flex items-center gap-1 uppercase tracking-widest text-[11px]">
+                                        <Link to={item.path} className="hover:text-accent transition-colors flex items-center gap-1 uppercase tracking-widest text-[11px]">
                                             {item.label}
                                             <ChevronRight className="size-3 rotate-90 opacity-30" />
-                                        </a>
+                                        </Link>
                                     </NavigationMenu.Link>
                                 )}
                             </NavigationMenu.Item>

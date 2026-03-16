@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
