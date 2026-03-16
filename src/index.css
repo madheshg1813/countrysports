@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Lexend", "sans-serif";
+  --color-primary: #22d3ee;
+  --color-primary-dark: #0891b2;
+  --color-accent: #22d3ee;
+  --color-accent-hover: #0891b2;
+  --color-background-dark: #0f172a;
+  --color-background-light: #ffffff;
+  --color-surface: #1e293b;
+  --color-border: #334155;
+
+  --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  --shadow-cyan: 0 0 30px rgba(34, 211, 238, 0.2);
+
+  --color-gold: #D4AF37;
+  --color-gold-light: #F9E076;
+  --color-gold-dark: #996515;
+}
+
+@layer base {
+  body {
+    @apply min-h-screen font-display;
+  }
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+.glass-light {
+  @apply bg-white/70 backdrop-blur-lg border border-slate-200 shadow-premium;
+}
+
+@utility shadow-glow {
+  box-shadow: 0 0 25px -5px var(--color-accent), 0 8px 10px -6px var(--color-accent);
+}
+
+.glow {
+  box-shadow: 0 0 25px -5px var(--color-accent), 0 8px 10px -6px var(--color-accent);
+}
+
+.btn-primary {
+  @apply bg-accent hover:bg-accent-hover text-black font-black py-4 px-10 rounded-2xl transition-all duration-300 shadow-xl shadow-accent/20 flex items-center justify-center gap-2;
+}
+
+.btn-royal {
+  @apply bg-primary hover:bg-primary-dark text-black font-black py-4 px-10 rounded-2xl transition-all duration-300 shadow-xl shadow-primary/20 flex items-center justify-center gap-2 border border-white/10;
+}
+
+.text-cyan {
+  @apply text-accent font-black tracking-[0.3em] uppercase;
+}
+
+.card-premium {
+  @apply bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-accent/40 transition-all duration-500 shadow-2xl;
+}
+
+.glow-text {
+  text-shadow: 0 0 15px rgba(89, 242, 13, 0.5);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #996515 0%, #D4AF37 50%, #F9E076 100%);
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #996515 0%, #D4AF37 50%, #F9E076 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.royal-border {
+  position: relative;
+  border: 1px solid transparent;
+  background: linear-gradient(var(--color-background-dark), var(--color-background-dark)) padding-box,
+              linear-gradient(135deg, #996515, #D4AF37, #F9E076) border-box;
+}
+
+.royal-shadow {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #A67C00 0%, #E5B100 25%, #FFD700 50%, #E5B100 75%, #A67C00 100%);
+  background-size: 200% auto;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  @apply text-black font-black py-3 px-8 rounded-sm transition-all duration-500 shadow-xl flex items-center justify-center gap-2 hover:bg-[right_center] hover:scale-105 active:scale-95 uppercase tracking-wider text-[13px];
+  box-shadow: 0 10px 20px -10px rgba(166, 124, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-gold:hover {
+  box-shadow: 0 15px 30px -10px rgba(166, 124, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.btn-cyan-soft {
+  background: white;
+  color: #0891b2;
+  border: 2px solid #0891b2;
+  @apply font-black py-3 px-10 rounded-full transition-all duration-200 flex items-center justify-center gap-2 relative overflow-hidden;
+  box-shadow: 0 4px 0 #0e7490;
+}
+
+.btn-cyan-soft:hover {
+  @apply bg-accent/5;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #0e7490;
+}
+
+.btn-cyan-soft:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+@keyframes enterFromRight { from { opacity: 0; transform: translateX(200px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes enterFromLeft { from { opacity: 0; transform: translateX(-200px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes exitToRight { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(200px); } }
+@keyframes exitToLeft { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-200px); } }
+@keyframes scaleIn { from { opacity: 0; transform: rotateX(-30deg) scale(0.9); } to { opacity: 1; transform: rotateX(0deg) scale(1); } }
+@keyframes scaleOut { from { opacity: 1; transform: rotateX(0deg) scale(1); } to { opacity: 0; transform: rotateX(-10deg) scale(0.95); } }
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }
