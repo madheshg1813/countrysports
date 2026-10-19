@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-montserrat), "Arial", sans-serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+
+  /* Navy */
+  --color-navy-950: #06172b;
+  --color-navy-900: #101c35;
+  --color-navy-800: #082b50;
+  --color-navy-700: #0b3d67;
+
+  /* Lime: CTAs, highlights, icons on navy */
+  --color-lime: #8bcf16;
+  --color-lime-600: #77b512;
+  --color-lime-700: #63a30d;
+  /* Lime-green for text/icons on white: 3.1:1, passes for large bold text and icons */
+  --color-lime-ink: #63a30d;
+  /* Dark green for accent text/icons on navy (5.2:1 on #06172B); CTAs stay lime */
+  --color-green-deep: #2f9e44;
+  /* Dark green for section headings on white (7.1:1 on #FFFFFF) */
+  --color-green-heading: #166534;
+  --font-script: var(--font-kaushan), cursive;
+
+  /* Light surfaces */
+  --color-paper: #f7f9fc;
+  --color-card: #f1f5f9;
+  --color-line: #e4e9f0;
+
+  /* Text */
+  --color-ink: #101828;
+  --color-ink-muted: #667085;      /* 4.6:1 on #F7F9FC */
+  --color-on-navy-muted: #b6c2d3;  /* secondary text on navy, 9:1 on #06172b */
+
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px -4px rgba(16, 24, 40, 0.08);
+  --shadow-card-hover: 0 2px 4px rgba(16, 24, 40, 0.05), 0 16px 32px -12px rgba(16, 24, 40, 0.18);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-extrabold uppercase;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-navy-700);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .bg-navy-hero :focus-visible,
+  .on-navy :focus-visible {
+    outline-color: var(--color-green-deep);
+  }
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-navy-950);
+  }
+}
+
+@utility container-site {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility eyebrow {
+  @apply font-sans text-xs font-bold uppercase tracking-[0.18em] sm:text-sm;
+}
+
+/* Fluid display sizes */
+@utility text-hero {
+  font-size: clamp(2.4rem, 1.3rem + 4.6vw, 4.75rem);
+  line-height: 0.98;
+}
+@utility text-section {
+  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  line-height: 1.05;
+}
+
+/* Gradients (used sparingly) */
+@utility bg-navy-hero {
+  background-image: linear-gradient(115deg, #06172b 0%, #082b50 55%, #0b3d67 100%);
+}
+@utility bg-navy-deep {
+  background-image: linear-gradient(135deg, #06172b 0%, #101c35 55%, #082b50 100%);
+}
+
+/* Buttons */
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 py-3 text-center font-sans text-base font-bold transition-[background-color,border-color,color,box-shadow,transform] duration-200;
+}
+@utility btn-primary {
+  @apply btn bg-lime text-navy-950 shadow-[0_8px_20px_-8px_rgba(139,207,22,0.5)] hover:bg-lime-600 hover:-translate-y-px active:translate-y-0;
+}
+@utility btn-secondary-dark {
+  @apply btn border border-white/35 text-white hover:border-white hover:bg-white/10;
+}
+@utility btn-secondary-light {
+  @apply btn border border-line bg-white text-ink hover:border-ink/40;
+}
+
+/* Highlighter for lime-accented words on light backgrounds: keeps dark text
+   readable (lime text on white would fail contrast). */
+@utility highlight-lime {
+  background-image: linear-gradient(transparent 58%, var(--color-lime) 58%, var(--color-lime) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-inline: 0.06em;
+}
+
+/* Fine string-bed pattern for image placeholders and decorative panels */
+@utility string-grid {
+  background-image:
+    linear-gradient(rgba(47, 158, 68, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 158, 68, 0.2) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
