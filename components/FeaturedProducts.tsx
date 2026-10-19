@@ -4,9 +4,17 @@ import { featuredProducts, formatPrice, stringBrands } from '@/lib/business';
 import WhatsAppCTA from './WhatsAppCTA';
 import { Accent, SectionHeading } from './Section';
 
-/** Strings the shop stocks, each with a WhatsApp enquiry. Hidden if none are configured. */
-export default function FeaturedProducts() {
-  if (featuredProducts.length === 0) return null;
+/**
+ * Strings the shop stocks, each with a WhatsApp enquiry. `brand` limits the list to one brand.
+ * Hidden if none are configured.
+ */
+export default function FeaturedProducts({
+  brand,
+  title = <>Strings We <Accent>Recommend</Accent></>,
+  intro = 'Popular strings we stock. Ask us which one suits your game.',
+}: { brand?: string; title?: React.ReactNode; intro?: string } = {}) {
+  const products = brand ? featuredProducts.filter((p) => p.brand === brand) : featuredProducts;
+  if (products.length === 0) return null;
 
   return (
     <section aria-labelledby="products-heading" className="bg-paper py-16 sm:py-20">
@@ -14,11 +22,11 @@ export default function FeaturedProducts() {
         <SectionHeading
           id="products-heading"
           eyebrow="Featured Products"
-          title={<>Strings We <Accent>Recommend</Accent></>}
-          intro="Popular strings we stock. Ask us which one suits your game."
+          title={title}
+          intro={intro}
         />
         <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredProducts.map((p) => {
+          {products.map((p) => {
             const logo = stringBrands.find((b) => b.name === p.brand)?.logo;
             return (
               <li key={p.brand + p.name}>

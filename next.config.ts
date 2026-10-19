@@ -13,12 +13,10 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 2592000,
   },
   // Old Vite-era URLs: city landing pages were removed (unverified coverage), so send
-  // visitors to /services. Old per-brand pages (/brands/yonex etc.) go to the /brands page;
-  // `:path+` needs at least one segment, so /brands itself is not redirected.
+  // visitors to /services. Per-brand pages live at /brands/<slug> again.
   async redirects() {
     return [
       { source: '/chennai/:path*', destination: '/services', permanent: true },
-      { source: '/brands/:path+', destination: '/brands', permanent: true },
       { source: '/services/badminton', destination: '/services', permanent: true },
     ];
   },

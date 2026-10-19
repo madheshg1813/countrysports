@@ -6,7 +6,7 @@ import BrandCarousel from './BrandCarousel';
 export default function StringBrandsSection() {
   if (stringBrands.length === 0) return null;
 
-  const tiles = stringBrands.map((b) => ({ name: b.name, logo: b.logo }));
+  const tiles = stringBrands.map((b) => ({ name: b.name, logo: b.logo, href: `/brands/${b.slug}` }));
 
   return (
     <section aria-labelledby="brands-heading" className="py-14 sm:py-16">

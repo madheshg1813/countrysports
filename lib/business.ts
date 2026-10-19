@@ -179,21 +179,30 @@ export const services: Service[] = [
   },
 ];
 
+export interface StringBrand {
+  /** URL part of the brand's own page: /brands/<slug>. */
+  slug: string;
+  name: string;
+  /** `wordmark: true` = the logo already spells the brand name, so the text name is hidden visually. */
+  logo?: { src: string; width: number; height: number; wordmark?: boolean };
+  /** Optional paragraph for the brand's page, written by the shop. Leave out until confirmed. */
+  about?: string;
+}
+
 /**
- * String brands the shop stocks, shown as tiles in the homepage brand carousel.
- * A brand without a `logo` is shown as its name in text; add the logo file to
- * /public/images/brands when one is supplied.
+ * String brands the shop stocks: tiles in the homepage brand carousel and on the Brands
+ * page, each with its own page at /brands/<slug>. A brand without a `logo` is shown as its
+ * name in text; add the logo file to /public/images/brands when one is supplied.
  */
-/** `wordmark: true` = the logo already spells the brand name, so the text name is hidden visually. */
-export const stringBrands: { name: string; logo?: { src: string; width: number; height: number; wordmark?: boolean } }[] = [
-  { name: 'Yonex', logo: { src: '/images/brands/yonex.png', width: 269, height: 148 } },
-  { name: 'Victor', logo: { src: '/images/brands/victor.png', width: 160, height: 148 } },
-  { name: 'Li-Ning', logo: { src: '/images/brands/li-ning.png', width: 181, height: 148, wordmark: true } },
-  { name: 'Ashaway', logo: { src: '/images/brands/ashaway.png', width: 186, height: 148 } },
-  { name: 'Apacs', logo: { src: '/images/brands/apacs.png', width: 101, height: 101 } },
-  { name: 'Kizuna', logo: { src: '/images/brands/kizuna.png', width: 451, height: 81, wordmark: true } },
-  { name: 'Babolat', logo: { src: '/images/brands/babolat.png', width: 922, height: 157, wordmark: true } },
-  { name: 'Gosen', logo: { src: '/images/brands/gosen.png', width: 554, height: 140, wordmark: true } },
+export const stringBrands: StringBrand[] = [
+  { slug: 'yonex', name: 'Yonex', logo: { src: '/images/brands/yonex.png', width: 269, height: 148 } },
+  { slug: 'victor', name: 'Victor', logo: { src: '/images/brands/victor.png', width: 160, height: 148 } },
+  { slug: 'li-ning', name: 'Li-Ning', logo: { src: '/images/brands/li-ning.png', width: 181, height: 148, wordmark: true } },
+  { slug: 'ashaway', name: 'Ashaway', logo: { src: '/images/brands/ashaway.png', width: 186, height: 148 } },
+  { slug: 'apacs', name: 'Apacs', logo: { src: '/images/brands/apacs.png', width: 101, height: 101 } },
+  { slug: 'kizuna', name: 'Kizuna', logo: { src: '/images/brands/kizuna.png', width: 451, height: 81, wordmark: true } },
+  { slug: 'babolat', name: 'Babolat', logo: { src: '/images/brands/babolat.png', width: 922, height: 157, wordmark: true } },
+  { slug: 'gosen', name: 'Gosen', logo: { src: '/images/brands/gosen.png', width: 554, height: 140, wordmark: true } },
 ];
 
 /**

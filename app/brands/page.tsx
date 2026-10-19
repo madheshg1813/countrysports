@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import BrandLogo from '@/components/BrandLogo';
+import BrandGrid from '@/components/BrandGrid';
 import CTABand from '@/components/CTABand';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import { PageHero } from '@/components/Section';
@@ -30,14 +30,8 @@ export default function BrandsPage() {
       <section aria-labelledby="brands-grid-heading" className="py-16 sm:py-20">
         <div className="container-site">
           <h2 id="brands-grid-heading" className="text-section text-navy-700">Brands we stock</h2>
-          <p className="mt-2 text-base leading-relaxed text-ink-muted sm:text-lg">Strings are charged at MRP. Message us to check a particular string is in stock.</p>
-          <ul className="mt-8 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
-            {stringBrands.map((b) => (
-              <li key={b.name} className="flex h-28 items-center justify-center overflow-hidden rounded-2xl border border-line bg-white px-4 text-center shadow-card sm:h-32">
-                <BrandLogo name={b.name} logo={b.logo} stacked />
-              </li>
-            ))}
-          </ul>
+          <p className="mt-2 text-base leading-relaxed text-ink-muted sm:text-lg">Strings are charged at MRP. Pick a brand to see its strings, or message us to check a particular string is in stock.</p>
+          <BrandGrid brands={stringBrands} />
         </div>
       </section>
 

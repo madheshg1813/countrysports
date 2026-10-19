@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useRef, useSyncExternalStore } from 'react';
 import BrandLogo, { type BrandLogoData } from './BrandLogo';
 
@@ -9,7 +10,7 @@ import BrandLogo, { type BrandLogoData } from './BrandLogo';
  * then arrow keys scroll it; this is the keyboard pause for WCAG 2.2.2) and for a moment after
  * any manual scroll. Visitors who prefer reduced motion see a still strip they can scroll.
  */
-type Tile = { name: string; sub?: string; logo?: BrandLogoData };
+type Tile = { name: string; sub?: string; logo?: BrandLogoData; href?: string };
 
 /** Glide speed in pixels per second. */
 const SPEED = 60;
@@ -113,7 +114,14 @@ export default function BrandCarousel({ items }: { items: Tile[] }) {
             // Equal-width slots with no box, so logos sit straight on the page and stay evenly spaced.
             className="relative flex h-20 w-48 shrink-0 flex-col items-center justify-center overflow-hidden px-3 text-center sm:w-52"
           >
-            <BrandLogo name={b.name} logo={b.logo} />
+            {b.href ? (
+              // Copies stay out of the tab order; only the first set is reachable by keyboard.
+              <Link href={b.href} tabIndex={copy > 0 ? -1 : undefined} className="flex items-center justify-center after:absolute after:inset-0">
+                <BrandLogo name={b.name} logo={b.logo} />
+              </Link>
+            ) : (
+              <BrandLogo name={b.name} logo={b.logo} />
+            )}
             {/* With a logo the brand is already shown, so the brand caption is for screen readers only */}
             {b.sub && <span className={b.logo ? 'sr-only' : 'mt-0.5 text-[0.7rem] font-semibold uppercase tracking-wider text-ink-muted'}>{b.sub}</span>}
           </li>
