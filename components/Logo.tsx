@@ -8,7 +8,7 @@ export default function Logo({ className = 'h-10 lg:h-12' }: { className?: strin
   return (
     <Image
       src="/images/country-sports-logo.webp"
-      alt="Country Sports Racket Care"
+      alt="Country Sports"
       // Display size at 48px tall (source is 1200 × 293); Next.js serves 1x/2x versions from it.
       width={197}
       height={48}

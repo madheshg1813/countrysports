@@ -9,6 +9,7 @@ import Logo from './Logo';
 // No "Home" item: the logo links to the homepage.
 const NAV = [
   { href: '/services', label: 'Services' },
+  { href: '/strings', label: 'Strings' },
   { href: '/brands', label: 'Brands' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
@@ -40,7 +41,7 @@ export default function Header({ cta }: { cta: React.ReactNode }) {
         Skip to content
       </a>
       <div className="container-site flex h-16 items-center justify-between gap-6 lg:h-[4.5rem]">
-        <Link href="/" aria-label="Country Sports Racket Care, home" className="shrink-0">
+        <Link href="/" aria-label="Country Sports, home" className="shrink-0">
           <Logo />
         </Link>
 

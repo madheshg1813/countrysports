@@ -2,10 +2,12 @@ import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Kaushan_Script, Montserrat } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import WhatsAppCTA from '@/components/WhatsAppCTA';
-import LocalBusinessSchema from '@/components/LocalBusinessSchema';
+import JsonLd from '@/components/JsonLd';
 import { business } from '@/lib/business';
-import { METADATA_BASE } from '@/lib/site';
+import { siteSchema } from '@/lib/schema';
+import { METADATA_BASE, openGraph } from '@/lib/site';
 import './globals.css';
 
 const display = Montserrat({
@@ -38,12 +40,8 @@ export const metadata: Metadata = {
   description:
     'Badminton racket restringing, express 3-hour restringing, grip and grommet replacement at our Velachery, Chennai shop. Enquire on WhatsApp for price and turnaround.',
   applicationName: business.name,
-  openGraph: {
-    type: 'website',
-    siteName: business.name,
-    locale: 'en_IN',
-  },
-  twitter: { card: 'summary' },
+  openGraph: openGraph('/', business.name),
+  twitter: { card: 'summary_large_image' },
 };
 
 export const viewport: Viewport = {
@@ -57,7 +55,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header cta={<WhatsAppCTA label="Book Now" size="sm" icon={false} />} />
         <main id="main">{children}</main>
         <Footer />
-        <LocalBusinessSchema />
+        <FloatingWhatsApp />
+        <JsonLd data={siteSchema()} />
       </body>
     </html>
   );

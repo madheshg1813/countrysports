@@ -1,4 +1,5 @@
 import { business, featuredProducts, formatAddress, formatTime, services, formatPrice, stringBrands } from './business';
+import { findString } from './strings';
 
 const standard = services.find((s) => s.slug === 'standard-stringing');
 const express = services.find((s) => s.slug === 'express-stringing');
@@ -7,7 +8,7 @@ const hours = business.openingHours[0];
 /** "A, B and C" */
 const listJoin = (items: string[]) => (items.length > 1 ? `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}` : items[0] ?? '');
 const brands = listJoin(stringBrands.map((b) => b.name));
-const featuredStrings = listJoin(featuredProducts.map((p) => `${p.brand} ${p.name}`));
+const featuredStrings = listJoin(featuredProducts.flatMap((p) => { const s = findString(p.slug); return s ? [`${s.brand} ${s.name}`] : []; }));
 
 /**
  * Answers use only confirmed facts from lib/business.ts. The homepage shows the
@@ -22,13 +23,13 @@ export const faqs: { q: string; a: string }[] = [
   {
     q: 'How much does restringing cost?',
     a: standard?.price && express?.price
-      ? `Labour is ${formatPrice(standard.price)} for standard restringing and ${formatPrice(express.price)} for express. Strings are charged separately at MRP, so the total depends on the string you choose.`
+      ? `Labour is ${formatPrice(standard.price)} for standard restringing and ${formatPrice(express.price)} for express. Strings are charged separately (see string prices on our Pricing page), so the total depends on the string you choose.`
       : 'Send us a WhatsApp message with your racket and preferred string and we will share the price.',
   },
   {
     q: 'What does express restringing include?',
     a: express
-      ? `Your racket goes to the front of the queue and is ready in ${express.turnaround?.toLowerCase() ?? 'about 3 hours'}. Express also includes frame cleaning and a tension-retention coating.${express.price ? ` Labour is ${formatPrice(express.price)}, plus the string at MRP.` : ''} Message us first so we can confirm a same-day slot.`
+      ? `Your racket goes to the front of the queue and is ready in ${express.turnaround?.toLowerCase() ?? 'about 3 hours'}. Express also includes frame cleaning and a tension-retention coating.${express.price ? ` Labour is ${formatPrice(express.price)}, plus the string.` : ''} Message us first so we can confirm a same-day slot.`
       : 'Message us on WhatsApp and we will tell you if we can restring your racket the same day.',
   },
   {

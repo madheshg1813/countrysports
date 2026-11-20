@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import BrandGrid from '@/components/BrandGrid';
 import CTABand from '@/components/CTABand';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import { PageHero } from '@/components/Section';
 import WhatsAppCTA from '@/components/WhatsAppCTA';
 import { business, stringBrands } from '@/lib/business';
-import { canonical } from '@/lib/site';
+import { canonical, openGraph } from '@/lib/site';
 
 const brandNames = stringBrands.map((b) => b.name);
 
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   title: 'Badminton String Brands',
   description: `Badminton strings we stock at ${business.name}, Velachery, Chennai: ${brandNames.join(', ')}. Ask on WhatsApp which string suits your game.`,
   alternates: canonical('/brands'),
-  openGraph: { url: '/brands', title: `String Brands | ${business.name}` },
+  openGraph: openGraph('/brands', `String Brands | ${business.name}`),
 };
 
 export default function BrandsPage() {
@@ -30,7 +31,7 @@ export default function BrandsPage() {
       <section aria-labelledby="brands-grid-heading" className="py-16 sm:py-20">
         <div className="container-site">
           <h2 id="brands-grid-heading" className="text-section text-navy-700">Brands we stock</h2>
-          <p className="mt-2 text-base leading-relaxed text-ink-muted sm:text-lg">Strings are charged at MRP. Pick a brand to see its strings, or message us to check a particular string is in stock.</p>
+          <p className="mt-2 text-base leading-relaxed text-ink-muted sm:text-lg">Pick a brand to see its strings and prices, or <Link href="/strings" className="font-semibold text-green-heading underline-offset-4 hover:underline">browse every string</Link> by type, colour and brand.</p>
           <BrandGrid brands={stringBrands} />
         </div>
       </section>

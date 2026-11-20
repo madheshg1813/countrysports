@@ -24,7 +24,8 @@ const ctaPoints = [
  * "How it works": a four-step timeline (horizontal from 768px, vertical on phones) joined by a
  * dashed route line, then one WhatsApp CTA panel. Pass `service` to name that service in the
  * WhatsApp message; without it the message is a general restringing enquiry. WhatsAppCTA falls
- * back to a phone link when no WhatsApp number is configured. No animation.
+ * back to a phone link when no WhatsApp number is configured. Motion is CSS-only (floating badges,
+ * pulsing halos, a flowing route, rise-on-scroll) and is switched off under prefers-reduced-motion.
  */
 export default function BookingTimeline({ service }: { service?: Service }) {
   return (
@@ -39,21 +40,30 @@ export default function BookingTimeline({ service }: { service?: Service }) {
         />
 
         {/*
-          From 768px a dashed route runs between the first and last icon centres (4 columns, 1.5rem
-          gaps, icon badge 88px tall), behind the badges' opaque white rims.
+          From 768px a flowing dashed route runs between the first and last icon centres (4 columns,
+          1.5rem gaps, icon badge 88px tall), behind the badges' opaque white rims. A lime dot travels
+          along it and slips behind each badge as it passes.
         */}
-        <ol className="relative mx-auto mt-12 max-w-5xl md:mt-14 md:grid md:grid-cols-4 md:gap-6 md:before:absolute md:before:left-[calc((100%-4.5rem)/8)] md:before:right-[calc((100%-4.5rem)/8)] md:before:top-[2.6875rem] md:before:border-t-2 md:before:border-dashed md:before:border-green-heading/30">
+        <ol className="relative mx-auto mt-12 max-w-5xl md:mt-14 md:grid md:grid-cols-4 md:gap-6">
+          <li aria-hidden="true" className="route-flow absolute left-[calc((100%-4.5rem)/8)] right-[calc((100%-4.5rem)/8)] top-[2.6875rem] hidden h-0.5 md:block">
+            <span className="route-dot" />
+          </li>
           {steps.map((step, i) => (
             <li
               key={step.title}
-              // Phones: badge beside the text, with a dashed line down to the next badge.
-              className="relative flex gap-5 pb-10 after:absolute after:bottom-0 after:left-[2.125rem] after:top-[4.25rem] after:-translate-x-1/2 after:border-l-2 after:border-dashed after:border-green-heading/30 last:pb-0 last:after:hidden md:flex-col md:items-center md:gap-0 md:pb-0 md:text-center md:after:hidden"
+              // Phones: badge beside the card, with a dashed line down to the next badge.
+              className="reveal-on-scroll group relative flex gap-4 pb-8 after:absolute after:bottom-0 after:left-[2.125rem] after:top-[4.25rem] after:-translate-x-1/2 after:border-l-2 after:border-dashed after:border-green-heading/30 last:pb-0 last:after:hidden md:flex-col md:items-center md:gap-0 md:pb-0 md:text-center md:after:hidden"
             >
-              {/* White rim (hides the route) > soft green halo > solid green icon, with the step number on a white tab */}
-              <span aria-hidden="true" className="relative z-10 shrink-0 self-start rounded-full bg-white p-1 md:self-center md:p-1.5">
-                <span className="block rounded-full bg-green-heading/10 p-1.5 md:p-2">
-                  <span className="flex size-12 items-center justify-center rounded-full bg-green-heading text-white shadow-card md:size-15">
-                    <step.icon className="size-5 md:size-6" />
+              {/* Floating badge: white rim (hides the route) > pulsing halo > green icon (lime on hover), with the step number on a white tab */}
+              <span
+                aria-hidden="true"
+                className="animate-float relative z-10 shrink-0 self-start rounded-full bg-white p-1 md:self-center md:p-1.5"
+                style={{ animationDelay: `${i * 0.5}s` }}
+              >
+                <span className="relative block rounded-full bg-green-heading/10 p-1.5 md:p-2">
+                  <span className="animate-halo absolute inset-0 rounded-full bg-green-heading/20" style={{ animationDelay: `${i * 0.6}s` }} />
+                  <span className="relative flex size-12 items-center justify-center rounded-full bg-green-heading text-white shadow-card transition-colors duration-300 group-hover:bg-lime group-hover:text-navy-950 md:size-15">
+                    <step.icon className="size-5 transition-transform duration-300 group-hover:scale-110 md:size-6" />
                   </span>
                 </span>
                 <span className="absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-white px-1.5 font-display text-[0.7rem] font-extrabold text-green-heading shadow-card ring-1 ring-line md:h-7 md:min-w-7 md:text-xs">
@@ -61,8 +71,8 @@ export default function BookingTimeline({ service }: { service?: Service }) {
                 </span>
               </span>
 
-              {/* From 768px the chip sits at the bottom of each step so all four line up */}
-              <div className="pt-2 md:mt-4 md:flex md:flex-1 md:flex-col md:items-center md:pt-0">
+              {/* Floating card; from 768px the chip sits at the bottom so all four line up */}
+              <div className="flex-1 rounded-2xl bg-white p-4 shadow-card ring-1 ring-line transition-[box-shadow,transform] duration-300 group-hover:-translate-y-1.5 group-hover:shadow-card-hover md:mt-5 md:flex md:w-full md:flex-col md:items-center md:p-5">
                 <h3 className="font-display text-lg font-bold normal-case tracking-normal text-navy-900 md:text-base lg:text-lg">{step.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink-muted md:mx-auto md:mb-3 md:max-w-[15rem]">{step.text}</p>
                 {step.chip && (

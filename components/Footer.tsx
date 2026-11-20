@@ -40,7 +40,7 @@ export default function Footer() {
         <div className="lg:col-span-2">
           <Column title="Quick Links" label="Footer: quick links">
             <ul className="space-y-3">
-              {[['/', 'Home'], ['/services', 'Stringing Services'], ['/brands', 'String Brands'], ['/pricing', 'Pricing'], ['/about', 'About Us'], ['/contact', 'Contact']].map(([href, label]) => (
+              {[['/', 'Home'], ['/services', 'Stringing Services'], ['/strings', 'Shop Strings'], ['/string-finder', 'String Finder'], ['/tension-guide', 'Tension Guide'], ['/clubs', 'Clubs & Academies'], ['/brands', 'String Brands'], ['/pricing', 'Pricing'], ['/about', 'About Us'], ['/contact', 'Contact']].map(([href, label]) => (
                 <li key={href}><Link href={href} className={linkCls}>{label}</Link></li>
               ))}
             </ul>

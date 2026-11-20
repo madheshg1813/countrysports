@@ -42,11 +42,13 @@ export interface Service {
 }
 
 export const business = {
-  name: 'Country Sports Racket Care',
+  name: 'Country Sports',
   shortName: 'Country Sports',
   tagline: 'Badminton racket restringing and care in Velachery, Chennai',
 
-  phone: { display: '+91 94446 06191', tel: '+919444606191' } as Maybe<{ display: string; tel: string }>,
+  phone: { display: '+91 97898 10915', tel: '+919789810915' } as Maybe<{ display: string; tel: string }>,
+  /** WhatsApp number: digits only with country code. NEXT_PUBLIC_WHATSAPP_NUMBER overrides it. */
+  whatsapp: '919789810915' as Maybe<string>,
   email: 'countrysports@gmail.com' as Maybe<string>,
 
   address: {
@@ -96,10 +98,10 @@ export const services: Service[] = [
     details: [
       'Tell us your string and preferred tension, or ask us to suggest one for how you play.',
       'Ready within 24 hours.',
-      'Labour is charged separately; strings are charged at MRP.',
+      'Labour is charged separately from the string.',
     ],
     price: 350,
-    priceNote: 'labour + string at MRP',
+    priceNote: 'labour + string',
     turnaround: 'Within 24 hours',
     featured: true,
     photo: { src: '/images/service-standard-stringing.jpg', alt: 'A badminton racket clamped on a stringing machine while lime-green string is woven through the frame', width: 1024, height: 576 },
@@ -130,7 +132,7 @@ export const services: Service[] = [
       'Message us first so we can confirm a same-day slot.',
     ],
     price: 600,
-    priceNote: 'labour + string at MRP',
+    priceNote: 'labour + string',
     turnaround: 'About 3 hours',
   },
   {
@@ -198,38 +200,32 @@ export const stringBrands: StringBrand[] = [
   { slug: 'yonex', name: 'Yonex', logo: { src: '/images/brands/yonex.png', width: 269, height: 148 } },
   { slug: 'victor', name: 'Victor', logo: { src: '/images/brands/victor.png', width: 160, height: 148 } },
   { slug: 'li-ning', name: 'Li-Ning', logo: { src: '/images/brands/li-ning.png', width: 181, height: 148, wordmark: true } },
-  { slug: 'ashaway', name: 'Ashaway', logo: { src: '/images/brands/ashaway.png', width: 186, height: 148 } },
-  { slug: 'apacs', name: 'Apacs', logo: { src: '/images/brands/apacs.png', width: 101, height: 101 } },
-  { slug: 'kizuna', name: 'Kizuna', logo: { src: '/images/brands/kizuna.png', width: 451, height: 81, wordmark: true } },
   { slug: 'babolat', name: 'Babolat', logo: { src: '/images/brands/babolat.png', width: 922, height: 157, wordmark: true } },
+  { slug: 'ashaway', name: 'Ashaway', logo: { src: '/images/brands/ashaway.png', width: 186, height: 148 } },
   { slug: 'gosen', name: 'Gosen', logo: { src: '/images/brands/gosen.png', width: 554, height: 140, wordmark: true } },
+  { slug: 'kizuna', name: 'Kizuna', logo: { src: '/images/brands/kizuna.png', width: 451, height: 81, wordmark: true } },
+  { slug: 'apacs', name: 'Apacs', logo: { src: '/images/brands/apacs.png', width: 101, height: 101 } },
 ];
 
 /**
- * Featured string products (strings the shop stocks). `price: null` shows
- * "Price on enquiry" — add real prices here when confirmed.
+ * Strings in the "Strings We Recommend" section. `slug` points at a string in lib/strings.ts,
+ * which supplies the name, price, colours and gauge; the wording here is the shop's own.
  */
-export const featuredProducts: { name: string; brand: string; summary: string; bestFor: string; price: Maybe<number> }[] = [
+export const featuredProducts: { slug: string; summary: string; bestFor: string }[] = [
   {
-    name: 'BG65',
-    brand: 'Yonex',
+    slug: 'yonex-bg65',
     summary: 'A durable all-round string with a comfortable, controlled feel.',
     bestFor: 'Regular club play and beginners',
-    price: null,
   },
   {
-    name: 'BG80',
-    brand: 'Yonex',
+    slug: 'yonex-bg80-power',
     summary: 'A crisp, hard-hitting string with a sharp feel on impact.',
     bestFor: 'Attacking players who want power',
-    price: null,
   },
   {
-    name: 'Exbolt',
-    brand: 'Yonex',
-    summary: 'A thin, fast-repelling string for quick, powerful shots.',
-    bestFor: 'Fast doubles and smash-heavy play',
-    price: null,
+    slug: 'yonex-bg66-ultimax',
+    summary: 'A thin, fast-repelling string with a loud, crisp sound and fine control.',
+    bestFor: 'Fast doubles and touch at the net',
   },
 ];
 

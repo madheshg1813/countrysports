@@ -7,13 +7,13 @@ import Placeholder from '@/components/Placeholder';
 import CTABand from '@/components/CTABand';
 import { Accent, PageHero, SectionHeading } from '@/components/Section';
 import { business, photos } from '@/lib/business';
-import { canonical } from '@/lib/site';
+import { canonical, openGraph } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'About Our Velachery Racket Workshop',
   description: `About ${business.name}, a badminton racket restringing and repair shop in Velachery, Chennai.`,
   alternates: canonical('/about'),
-  openGraph: { url: '/about', title: `About | ${business.name}` },
+  openGraph: openGraph('/about', `About | ${business.name}`),
 };
 
 export default function AboutPage() {

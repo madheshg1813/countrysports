@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { ChartNoAxesColumn, Target, Zap } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, ChartNoAxesColumn, Target, Zap } from 'lucide-react';
 import { photos } from '@/lib/business';
 import WhatsAppCTA from './WhatsAppCTA';
 import { Accent, Eyebrow } from './Section';
@@ -30,11 +31,16 @@ export default function ExpertAdviceBanner() {
           <p className="mt-3 max-w-md leading-relaxed text-ink-muted sm:text-lg">
             Tell us your playing style and we’ll recommend the best string and tension for you.
           </p>
-          <WhatsAppCTA
-            className="mt-6"
-            label="Chat with Us on WhatsApp"
-            enquiryPhrase="advice on the right string and tension for my playing style"
-          />
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/string-finder" className="btn-primary">
+              Take the 1-minute quiz <ArrowRight aria-hidden="true" className="size-5" />
+            </Link>
+            <WhatsAppCTA
+              variant="secondary-light"
+              label="Chat on WhatsApp"
+              enquiryPhrase="advice on the right string and tension for my playing style"
+            />
+          </div>
         </div>
         {/* Photo side: the diagonal runs from 52% of the banner width at the top to 43% at the bottom */}
         <div className="on-navy bg-navy-deep relative h-60 sm:h-64 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[57%] lg:[clip-path:polygon(16%_0,100%_0,100%_100%,0_100%)]">

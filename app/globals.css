@@ -136,6 +136,59 @@
   animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Gentle up-and-down bob for floating badges */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Soft ring that grows out of an icon and fades */
+@keyframes halo {
+  from { transform: scale(1); opacity: 0.55; }
+  to { transform: scale(1.55); opacity: 0; }
+}
+.animate-halo {
+  animation: halo 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* Dashed route that flows left to right, with a lime dot travelling along it */
+@keyframes route-flow {
+  to { background-position: 14px 0; }
+}
+.route-flow {
+  background-image: linear-gradient(90deg, rgb(22 101 52 / 0.35) 55%, transparent 0);
+  background-size: 14px 2px;
+  animation: route-flow 0.9s linear infinite;
+}
+@keyframes route-travel {
+  0% { left: 0; opacity: 0; }
+  8%, 92% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+.route-dot {
+  position: absolute;
+  top: 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: var(--color-lime);
+  box-shadow: 0 0 0 4px rgb(139 207 22 / 0.25), 0 0 14px 2px rgb(139 207 22 / 0.7);
+  transform: translate(-50%, -50%);
+  animation: route-travel 6s ease-in-out infinite;
+}
+
+/* Rise into place as the element scrolls into view (browsers without scroll timelines just show it) */
+@supports (animation-timeline: view()) {
+  .reveal-on-scroll {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

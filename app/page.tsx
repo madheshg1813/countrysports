@@ -13,17 +13,19 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import CTABand from '@/components/CTABand';
 import RacketArt from '@/components/RacketArt';
 import FAQ from '@/components/FAQ';
+import JsonLd from '@/components/JsonLd';
 import ContactDetails from '@/components/ContactDetails';
 import { Accent, SectionHeading } from '@/components/Section';
 import { business, photos, services } from '@/lib/business';
-import { canonical } from '@/lib/site';
+import { faqSchema } from '@/lib/schema';
+import { canonical, openGraph } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: { absolute: `${business.name} | Badminton Racket Restringing in Velachery, Chennai` },
   description:
     'Badminton racket restringing in Velachery, Chennai: standard within 24 hours or express in about 3 hours, plus grip and grommet replacement. Enquire on WhatsApp.',
   alternates: canonical('/'),
-  openGraph: { url: '/', title: `${business.name}: badminton racket restringing in Velachery, Chennai` },
+  openGraph: openGraph('/', `${business.name}: badminton racket restringing in Velachery, Chennai`),
 };
 
 const heroIndicators = [
@@ -138,6 +140,7 @@ export default function HomePage() {
               <h3 className="font-display text-xl font-bold normal-case tracking-normal text-ink">Before you visit</h3>
               <p className="mt-3 leading-relaxed text-ink-muted">
                 Message us first and we will tell you if your string is in stock and when your racket can be ready. For express service, this helps us keep a slot for you.
+                You can also send the details with our <Link href="/contact#book" className="font-semibold text-green-heading underline-offset-4 hover:underline">enquiry form</Link>.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <WhatsAppCTA />
@@ -164,6 +167,7 @@ export default function HomePage() {
             intro="Quick answers about restringing times, prices, strings and visiting our shop."
           />
           <div className="mt-10"><FAQ /></div>
+          <JsonLd data={faqSchema()} />
         </div>
       </section>
 

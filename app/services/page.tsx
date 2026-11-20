@@ -1,21 +1,26 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Check, Clock } from 'lucide-react';
 import WhatsAppCTA from '@/components/WhatsAppCTA';
 import ServicePicker from '@/components/ServicePicker';
 import CTABand from '@/components/CTABand';
+import JsonLd from '@/components/JsonLd';
 import TrustBar from '@/components/TrustBar';
 import { PageHero } from '@/components/Section';
 import { PriceTag, serviceIcons } from '@/components/ServiceCard';
 import { business, services } from '@/lib/business';
-import { canonical } from '@/lib/site';
+import { servicesSchema } from '@/lib/schema';
+import { canonical, openGraph } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Badminton Racket Restringing & Repair Services',
   description:
     'Badminton racket restringing (standard and 3-hour express), grip replacement, grommet replacement and frame checks in Velachery, Chennai. Prices and turnaround times.',
   alternates: canonical('/services'),
-  openGraph: { url: '/services', title: `Services | ${business.name}` },
+  openGraph: openGraph('/services', `Services | ${business.name}`),
 };
+
+const heroLink = 'font-semibold text-green-deep underline-offset-4 hover:underline';
 
 export default function ServicesPage() {
   return (
@@ -23,10 +28,15 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Our Services"
         title={<>Racket stringing <span className="text-green-deep">services</span></>}
-        intro="Stringing, advice, grips and racket care for badminton players. Labour prices are listed below; strings are charged at MRP."
+        intro={<>
+          Stringing, advice, grips and racket care for badminton players. Labour prices are listed below; strings are charged separately
+          (see <Link href="/pricing" className={heroLink}>string prices</Link>). Drop your racket at our <Link href="/contact" className={heroLink}>Velachery shop</Link>.
+        </>}
       >
         <WhatsAppCTA label="Book Your Stringing" />
       </PageHero>
+
+      <JsonLd data={servicesSchema()} />
 
       <section aria-label="Service list" className="py-16 sm:py-20">
         <div className="container-site grid gap-10 lg:grid-cols-12">
